@@ -1,7 +1,8 @@
-import re
-import pandas as pd
-import math
 import csv
+import math
+import re
+
+import pandas as pd
 
 df = pd.read_csv("/home/suman/Desktop/Doctor-recommendation-system/datasets/Training.csv")
 stop_words = [
