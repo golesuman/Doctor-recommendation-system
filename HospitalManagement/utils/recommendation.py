@@ -1,12 +1,11 @@
 import csv
 import math
 import re
+
 import inflect
 import pandas as pd
 
-df = pd.read_csv(
-    "/home/suman/Desktop/Doctor-recommendation-system/HospitalManagement/datasets/Training.csv"
-)
+df = pd.read_csv("/home/suman/Desktop/Doctor-recommendation-system/HospitalManagement/datasets/Training.csv")
 p = inflect.engine()
 
 stop_words = [
@@ -191,12 +190,11 @@ stop_words = [
     "wouldn't",
     "also",
 ]
-columns = df.columns[:-2]
 
 
 class RecommendDoctor:
     def __init__(self) -> None:
-        pass
+        self.columns = df.columns[:-2]
 
     def remove_stop_words(self, sentence):
         new_word_list = []
@@ -220,12 +218,9 @@ class RecommendDoctor:
 
     def create_vector_from_input(self, formatted_word_list):
         input_vector = []
-        for column in columns:
+        for column in self.columns:
             splitted_column = re.split("_", column)
-            # print(splitted_column)
-            input_vector.append(
-                1 if set(splitted_column).issubset(set(formatted_word_list)) else 0
-            )
+            input_vector.append(1 if set(splitted_column).issubset(set(formatted_word_list)) else 0)
         return input_vector
 
     def dot_product(self, vector1, vector2):
@@ -235,9 +230,7 @@ class RecommendDoctor:
         return math.sqrt(sum([x**2 for x in vector]))
 
     def cosine_similarity(self, vector1, vector2):
-        return self.dot_product(vector1, vector2) / (
-            self.magnitude(vector1) * self.magnitude(vector2)
-        )
+        return self.dot_product(vector1, vector2) / (self.magnitude(vector1) * self.magnitude(vector2))
 
     def get_cosine_similarities(self, vec2):
         similarities = []
@@ -248,7 +241,6 @@ class RecommendDoctor:
             next(reader_obj)
             for row in reader_obj:
                 int_row = [int(num) for num in row[1:]]
-                # print
                 try:
                     result = self.cosine_similarity(int_row, vec2)
                 except:
