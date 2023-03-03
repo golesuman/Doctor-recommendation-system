@@ -28,8 +28,8 @@ class PredictDoctorView(APIView):
         symptoms = serializer.data["symptoms"]
         no_of_doctors = serializer.data["noOfDoctors"]
         diseases = recommend.give_disease(input_text=symptoms, no_of_doctors=no_of_doctors)
-        # print(listdisease)
-        print(diseases[0])
+        print(diseases)
+        # print(diseases[0])
         queryset = get_doctor_service.get_doctor(diseases[0])
         serializer = self.OutputSerializer(queryset, many=True)
         return Response({"data": serializer.data}, status.HTTP_200_OK)

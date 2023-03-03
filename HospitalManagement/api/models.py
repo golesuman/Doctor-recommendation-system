@@ -32,7 +32,7 @@ class Doctor(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return str(self.name) + str(self.specialty)
+        return str(self.name) + " " + str(self.specialty)
 
     class Meta:
         verbose_name = "Doctor"
