@@ -6,19 +6,10 @@ from utils.recommendation import RecommendDoctor
 
 recommend = RecommendDoctor()
 
+
 class PredictDoctorView(APIView):
-
-#     permission_classes = [permissions.AllowAny]
-
-
     def post(self, request, *args, **kwargs):
         no_of_doctors = request.data["noOfDoctors"]
         symptoms = request.data["symptoms"]
         result = recommend.give_disease(input_text=symptoms, no_of_doctors=no_of_doctors)
-        return Response({"data" : result}, status.HTTP_200_OK)
-        # return Response("this is good")
-
-
-
-
-        
+        return Response({"data": result}, status.HTTP_200_OK)
