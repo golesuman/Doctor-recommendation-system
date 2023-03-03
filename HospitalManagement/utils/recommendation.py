@@ -70,7 +70,7 @@ class RecommendDoctor:
         sorted_scores = sorted(similarities, key=lambda x: x[1], reverse=True)
         return sorted_scores[:top_n]
 
-    def give_disease(self, input_text, no_of_doctors=5):
+    def give_disease(self, input_text, no_of_doctors=10):
         disease_result = []
         formatted_list = self.remove_stop_words(input_text)
         vec2 = self.create_vector_from_input(formatted_list)
@@ -78,7 +78,7 @@ class RecommendDoctor:
         results = self.sort_similarities(similarities, no_of_doctors)
         for res in results:
             disease_result.append(df.iloc[res[0]]["prognosis"])
-        return set(disease_result)
+        return list(set(disease_result))
 
 
 if __name__ == "__main__":
