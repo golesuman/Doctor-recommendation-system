@@ -5,7 +5,7 @@ import re
 import inflect
 import pandas as pd
 
-df = pd.read_csv("/home/suman/Desktop/Doctor-recommendation-system/HospitalManagement/datasets/Training.csv")
+df = pd.read_csv("./datasets/Training.csv")
 p = inflect.engine()
 
 stop_words = [
@@ -234,9 +234,7 @@ class RecommendDoctor:
 
     def get_cosine_similarities(self, vec2):
         similarities = []
-        with open(
-            "/home/suman/Desktop/Doctor-recommendation-system/HospitalManagement/datasets/updated_training_data.csv"
-        ) as file_obj:
+        with open("./datasets/updated_training_data.csv") as file_obj:
             reader_obj = csv.reader(file_obj)
             next(reader_obj)
             for row in reader_obj:
