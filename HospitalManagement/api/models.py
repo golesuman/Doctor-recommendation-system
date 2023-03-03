@@ -11,7 +11,7 @@ class Hospital(models.Model):
 
 class Specialty(models.Model):
     name_of_specialty = models.CharField(max_length=255)
-    symptoms = models.TextField(max_length=400)
+    disease = models.CharField(max_length=255)
 
     def __str__(self) -> str:
         return str(self.name_of_specialty)
