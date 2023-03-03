@@ -4,20 +4,19 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from utils.recommendation import RecommendDoctor
 
-recom = RecommendDoctor()
+recommend = RecommendDoctor()
 
 class PredictDoctorView(APIView):
-    permission_classes = [permissions.AllowAny]
+
+#     permission_classes = [permissions.AllowAny]
 
 
     def post(self, request, *args, **kwargs):
         no_of_doctors = request.data["noOfDoctors"]
         symptoms = request.data["symptoms"]
-        result = recom.give_disease(input_text=symptoms, no_of_doctors=no_of_doctors)
-        print({"data" : result}, status.HTTP_200_OK)
-# )
-        # return Response({"data" : result}, status.HTTP_200_OK)
-    
+        result = recommend.give_disease(input_text=symptoms, no_of_doctors=no_of_doctors)
+        return Response({"data" : result}, status.HTTP_200_OK)
+        # return Response("this is good")
 
 
 

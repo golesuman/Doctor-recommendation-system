@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from api.views import PredictDoctorView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('api.urls')),
+    path(route='predict-disease', view=PredictDoctorView.as_view(), name='predict-disease')
+
+    # path("predict-disease", )
+    # path('', include('api.urls')),
 ]
