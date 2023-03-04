@@ -24,10 +24,9 @@ def remove_stop_words(sentence):
             word = p.singular_noun(word_)
             if word:
                 cleaned_word = clean_numbers_and_special_characters(word)
-                cleaned_word = word
                 new_word_list.append(cleaned_word)
             else:
-                new_word_list.append(word_)
+                new_word_list.append(clean_numbers_and_special_characters(word_))
 
     return [i for i in new_word_list if i]
 
