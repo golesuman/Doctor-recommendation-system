@@ -1,4 +1,4 @@
-from api.models import Doctor
+from api.models.hospital import Doctor
 
 
 def get_doctor(disease):

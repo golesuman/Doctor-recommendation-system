@@ -50,7 +50,9 @@ def create_vector_from_input(formatted_word_list):
     input_vector = []
     for column in columns:
         splitted_column = re.split("_", column)
-        input_vector.append(1 if set(splitted_column).issubset(set(formatted_word_list)) else 0)
+        input_vector.append(
+            1 if set(splitted_column).issubset(set(formatted_word_list)) else 0
+        )
     return input_vector
 
 
@@ -81,7 +83,7 @@ def get_cosine_similarities(vec2):
 
 def sort_similarities(similarities):
     sorted_scores = sorted(similarities, key=lambda x: x[1], reverse=True)
-    return sorted_scores[:20]
+    return sorted_scores[:30]
 
 
 def give_disease(input_text):
