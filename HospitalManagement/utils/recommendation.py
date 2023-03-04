@@ -17,7 +17,7 @@ columns = df.columns[:-2]
 def remove_stop_words(sentence):
     new_word_list = []
     # split if the , or space is found in the sentence
-    splitted_words = re.split(r"[,\s]+", sentence.lower())
+    splitted_words = re.split(r"[,\s]+", sentence.strip().lower())
     # print(splitted_words)
     for word_ in splitted_words:
         if word_ not in stop_words:
