@@ -21,14 +21,9 @@ class PredictDoctorView(APIView):
         hospital = HospitalSerializer()
 
     def post(self, request, *args, **kwargs):
-        # print(diseases)
         serializer = self.InputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        symptoms = serializer.data["symptoms"]
-        no_of_doctors = serializer.data["noOfDoctors"]
         diseases = give_disease(input_text=request.data["symptoms"])
-        print(diseases[0])
         queryset = get_doctor_service.get_doctor(diseases[0])
         serializer = self.OutputSerializer(queryset, many=True)
         return Response({"data": serializer.data}, status.HTTP_200_OK)
-        # return Response({"data": diseases}, status=status.HTTP_200_OK)
