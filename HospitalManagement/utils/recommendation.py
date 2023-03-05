@@ -104,6 +104,8 @@ def give_disease(input_text):
     disease_result = []
     formatted_list = remove_stop_words(input_text)
     vec2 = create_vector_from_input(formatted_list)
+    if all(val == 0 for val in vec2):
+        return None
     # print(vec2)
     similarities = get_cosine_similarities(vec2)
     results = sort_similarities(similarities)

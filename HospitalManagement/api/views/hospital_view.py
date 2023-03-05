@@ -27,6 +27,11 @@ class PredictDoctorView(APIView):
         serializer = self.InputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         diseases = give_disease(input_text=request.data["symptoms"])
+        if not diseases:
+            return Response(
+                data={"data": "Please consult the general doctor first"},
+                status=status.HTTP_200_OK,
+            )
         for disease in diseases:
             queryset = get_doctor(disease)
             serializer = self.OutputSerializer(queryset)
