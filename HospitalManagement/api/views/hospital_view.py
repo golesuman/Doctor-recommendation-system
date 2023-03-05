@@ -7,7 +7,7 @@ from api.services.get_doctor_service import get_doctor
 from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from utils.recommendation import give_disease
+from utils.text_processing import give_disease, is_input_valid
 
 
 class PredictDoctorView(APIView):
@@ -26,10 +26,20 @@ class PredictDoctorView(APIView):
         result = []
         serializer = self.InputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        diseases = give_disease(input_text=request.data["symptoms"])
+        symptoms = request.data["symptoms"]
+        if not is_input_valid(symptoms):
+            return Response(
+                data={"data": "Please enter valid text"},
+                status=status.HTTP_200_OK,
+            )
+
+        diseases = give_disease(input_text=symptoms)
+        print(diseases)
         if not diseases:
             return Response(
-                data={"data": "Please consult the general doctor first"},
+                data={
+                    "data": "Sorry we couldn't find you a doctor. Please Sorry for inconvenience."
+                },
                 status=status.HTTP_200_OK,
             )
         for disease in diseases:

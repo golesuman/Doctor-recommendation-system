@@ -4,6 +4,7 @@ import re
 
 import inflect
 import pandas as pd
+from utils.cosine_similarity import get_cosine_similarities
 
 from .correct_wrong_words import fix_wrong_words
 from .stop_words import stop_words
@@ -48,7 +49,7 @@ def convert_to_verb1(word):
 
 
 def clean_numbers_and_special_characters(word):
-    pattern = "[^a-zA-Z]"
+    pattern = r"[^a-zA-Z]"
     if re.match(pattern, word):
         formatted_word = re.sub(pattern, "", word)
         return formatted_word
@@ -68,33 +69,6 @@ def create_vector_from_input(formatted_input_list):
     return vector
 
 
-def dot_product(vector1, vector2):
-    return sum([vector1[i] * vector2[i] for i in range(len(vector1))])
-
-
-def magnitude(vector):
-    return math.sqrt(sum([x**2 for x in vector]))
-
-
-def cosine_similarity(vector1, vector2):
-    return dot_product(vector1, vector2) / (
-        magnitude(vector1) * magnitude(vector2)
-    )
-
-
-def get_cosine_similarities(vec2):
-    similarities = []
-    with open("./datasets/updated_training_data.csv") as file_obj:
-        reader_obj = csv.reader(file_obj)
-        next(reader_obj)
-        for row in reader_obj:
-            int_row = [int(num) for num in row[1:]]
-            result = cosine_similarity(int_row, vec2)
-            similarities.append([int(row[0]), result])
-
-    return similarities
-
-
 def sort_similarities(similarities):
     sorted_scores = sorted(similarities, key=lambda x: x[1], reverse=True)
     return sorted_scores[:30]
@@ -112,6 +86,12 @@ def give_disease(input_text):
     for res in results:
         disease_result.append(df.iloc[res[0]]["prognosis"])
     return list(set(disease_result))
+
+
+def is_input_valid(input_text):
+    pattern = r"[a-zA-Z]+"
+    bool_value = re.match(pattern, input_text)
+    return bool_value
 
 
 if __name__ == "__main__":
