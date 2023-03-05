@@ -2,14 +2,15 @@ import re
 
 import inflect
 import pandas as pd
+from spellchecker import SpellChecker
 from utils.cosine_similarity import get_cosine_similarities
 
-from .correct_wrong_words import fix_wrong_words
 from .stop_words import stop_words
 
 df = pd.read_csv("./datasets/Training.csv")
-p = inflect.engine()
 
+p = inflect.engine()
+spell = SpellChecker()
 
 columns = df.columns[:-2]
 
@@ -22,7 +23,6 @@ def remove_duplicate_words(sentence):
 def remove_stop_words(sentence):
     new_word_list = []
     unique_sentence = remove_duplicate_words(sentence)
-    print(unique_sentence)
     sentence = fix_wrong_words(unique_sentence)
     # split if the , or space is found in the sentence
     splitted_words = re.split(r"[,\s]+", sentence.strip().lower())
@@ -34,9 +34,7 @@ def remove_stop_words(sentence):
                 new_word_list.append(cleaned_word)
             else:
                 new_word_list.append(
-                    clean_numbers_and_special_characters(word_)
-                )
-
+                    clean_numbers_and_special_characters(word_))
     return [i for i in new_word_list if i]
 
 
@@ -75,6 +73,7 @@ def sort_similarities(similarities):
 def give_disease(input_text):
     disease_result = []
     formatted_list = remove_stop_words(input_text)
+    print(formatted_list)
     vec2 = create_vector_from_input(formatted_list)
     if all(val == 0 for val in vec2):
         return None
@@ -91,6 +90,24 @@ def is_input_valid(input_text):
     pattern = r"[a-zA-Z]+"
     bool_value = re.match(pattern, input_text)
     return bool_value
+
+
+
+def fix_wrong_words(text):
+    corrected_sentence = []
+    for word in text.split():
+        if word:
+            corrected_sentence.append(spell.correction(word))
+    new_fixed_text = " ".join(corrected_sentence)
+    return new_fixed_text
+
+
+
+def remove_special_characters_from_word(word):
+    pattern = r"[^a-zA-Z]"
+    words = re.split(pattern, word)
+    return words
+
 
 
 if __name__ == "__main__":

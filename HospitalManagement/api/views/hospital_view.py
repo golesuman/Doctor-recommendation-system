@@ -1,18 +1,14 @@
 # from django.shortcuts import render
-from api.serializers.doctor_serializer import (
-    HospitalSerializer,
-    SpecialtySerializer,
-)
-from api.services.get_doctor_service import get_doctor
+from api.serializers.doctor_serializer import HospitalSerializer, SpecialtySerializer
 from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from utils.stop_words import specialties
 from utils.text_processing import give_disease, is_input_valid
 
 
 class PredictDoctorView(APIView):
     class InputSerializer(serializers.Serializer):
-        noOfDoctors = serializers.IntegerField()
         symptoms = serializers.CharField()
 
     class OutputSerializer(serializers.Serializer):
@@ -34,7 +30,7 @@ class PredictDoctorView(APIView):
             )
 
         diseases = give_disease(input_text=symptoms)
-        print(diseases)
+
         if not diseases:
             return Response(
                 data={
@@ -43,11 +39,8 @@ class PredictDoctorView(APIView):
                 status=status.HTTP_200_OK,
             )
         for disease in diseases:
-            queryset = get_doctor(disease)
-            if queryset:
-                serializer = self.OutputSerializer(queryset)
-                result.append(serializer.data)
+            for key, values in specialties.items():
+                if disease in values:
+                    result.append({disease: key})
 
-        # print(result)
         return Response(data={"data": result}, status=status.HTTP_200_OK)
-        # return Response({"data": diseases}, status.)
