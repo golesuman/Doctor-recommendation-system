@@ -13,7 +13,7 @@
     sudo docker run -p 8000:8000  backend:latest  
     ```
 
-- Send POST Request to the the 
+- Send POST Request to this endpoint
     ```
     http://0.0.0.0:8000/api/recommend-doctor
     ```
