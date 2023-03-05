@@ -131,6 +131,8 @@ pycparser==2.21
     # via cffi
 pydantic==1.10.5
     # via inflect
+pyenchant==3.2.2
+    # via -r requirements.in
 pyjwt[crypto]==2.6.0
     # via
     #   django-allauth
