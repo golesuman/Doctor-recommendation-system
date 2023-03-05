@@ -12,3 +12,24 @@
     ```
     sudo docker run -p 8000:8000  backend:latest  
     ```
+
+- Send POST Request to the the 
+    ```
+    http://0.0.0.0:8000/api/recommend-doctor
+    ```
+- Sample Input
+    ```
+    {
+        "symptoms" : "common cold and fever with red spots all over the body" 
+    }
+    ```
+- Sample Output
+    ```
+   {
+    "data": [
+        "Dermatologist",
+        "Neurologist",
+        "Allergist_Immunologist"
+        ]
+    }
+    ```
