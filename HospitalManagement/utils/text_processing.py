@@ -71,7 +71,7 @@ def create_vector_from_input(formatted_input_list):
 
 def sort_similarities(similarities):
     sorted_scores = sorted(similarities, key=lambda x: x[1], reverse=True)
-    return sorted_scores[:30]
+    return sorted_scores
 
 
 def give_disease(input_text):
@@ -84,7 +84,8 @@ def give_disease(input_text):
     similarities = get_cosine_similarities(vec2)
     results = sort_similarities(similarities)
     for res in results:
-        disease_result.append(df.iloc[res[0]]["prognosis"])
+        if res[1] > 0.2:
+            disease_result.append(df.iloc[res[0]]["prognosis"])
     return list(set(disease_result))
 
 

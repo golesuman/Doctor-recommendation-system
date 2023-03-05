@@ -44,7 +44,10 @@ class PredictDoctorView(APIView):
             )
         for disease in diseases:
             queryset = get_doctor(disease)
-            serializer = self.OutputSerializer(queryset)
-            result.append(serializer.data)
+            if queryset:
+                serializer = self.OutputSerializer(queryset)
+                result.append(serializer.data)
+
+        # print(result)
         return Response(data={"data": result}, status=status.HTTP_200_OK)
         # return Response({"data": diseases}, status.)
