@@ -5,6 +5,7 @@ import re
 import inflect
 import pandas as pd
 
+from .correct_wrong_words import fix_wrong_words
 from .stop_words import stop_words
 
 df = pd.read_csv("./datasets/Training.csv")
@@ -14,11 +15,18 @@ p = inflect.engine()
 columns = df.columns[:-2]
 
 
+def remove_duplicate_words(sentence):
+    unique_sentence = " ".join(set(sentence.split()))
+    return unique_sentence
+
+
 def remove_stop_words(sentence):
     new_word_list = []
+    unique_sentence = remove_duplicate_words(sentence)
+    print(unique_sentence)
+    sentence = fix_wrong_words(unique_sentence)
     # split if the , or space is found in the sentence
     splitted_words = re.split(r"[,\s]+", sentence.strip().lower())
-    # print(splitted_words)
     for word_ in splitted_words:
         if word_ not in stop_words:
             word = p.singular_noun(word_)
@@ -26,7 +34,9 @@ def remove_stop_words(sentence):
                 cleaned_word = clean_numbers_and_special_characters(word)
                 new_word_list.append(cleaned_word)
             else:
-                new_word_list.append(clean_numbers_and_special_characters(word_))
+                new_word_list.append(
+                    clean_numbers_and_special_characters(word_)
+                )
 
     return [i for i in new_word_list if i]
 
@@ -45,14 +55,17 @@ def clean_numbers_and_special_characters(word):
     return word
 
 
-def create_vector_from_input(formatted_word_list):
-    input_vector = []
-    for column in columns:
-        splitted_column = re.split("_", column)
-        input_vector.append(
-            1 if set(splitted_column).issubset(set(formatted_word_list)) else 0
-        )
-    return input_vector
+def create_vector_from_input(formatted_input_list):
+    column_list = [" ".join(col.split("_")) for col in columns]
+    vector = [0] * len(column_list)
+
+    for i in range(len(column_list)):
+        for keyword in column_list[i].split():
+            if keyword in formatted_input_list:
+                vector[i] = 1
+                # print(i)
+                break
+    return vector
 
 
 def dot_product(vector1, vector2):
@@ -64,7 +77,9 @@ def magnitude(vector):
 
 
 def cosine_similarity(vector1, vector2):
-    return dot_product(vector1, vector2) / (magnitude(vector1) * magnitude(vector2))
+    return dot_product(vector1, vector2) / (
+        magnitude(vector1) * magnitude(vector2)
+    )
 
 
 def get_cosine_similarities(vec2):
