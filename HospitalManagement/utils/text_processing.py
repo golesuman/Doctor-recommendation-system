@@ -16,8 +16,12 @@ columns = df.columns[:-2]
 
 
 def remove_duplicate_words(sentence):
-    unique_sentence = " ".join(set(sentence.split()))
-    return unique_sentence
+    unique_sentence = []
+    for word in sentence.split():
+        if word not in unique_sentence:
+            unique_sentence.append(word)
+    new_sentence = " ".join(unique_sentence)
+    return new_sentence
 
 
 def remove_stop_words(sentence):
@@ -26,6 +30,7 @@ def remove_stop_words(sentence):
     sentence = fix_wrong_words(unique_sentence)
     # split if the , or space is found in the sentence
     splitted_words = re.split(r"[,\s]+", sentence.strip().lower())
+    # splitted_words = sentence.strip().lower().split()
     for word_ in splitted_words:
         if word_ not in stop_words:
             word = p.singular_noun(word_)
@@ -77,12 +82,10 @@ def give_disease(input_text):
     vec2 = create_vector_from_input(formatted_list)
     if all(val == 0 for val in vec2):
         return None
-    # print(vec2)
     similarities = get_cosine_similarities(vec2)
     results = sort_similarities(similarities)
-    print(results)
     for res in results:
-        if res[1] > 0.2:
+        if res[1] > 0.1:
             disease_result.append(df.iloc[res[0]]["prognosis"])
     return list(set(disease_result))
 
@@ -100,6 +103,7 @@ def fix_wrong_words(text):
         if word:
             corrected_sentence.append(spell.correction(word))
     new_fixed_text = " ".join(corrected_sentence)
+    print(new_fixed_text)
     return new_fixed_text
 
 
