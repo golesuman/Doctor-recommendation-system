@@ -34,7 +34,7 @@ class PredictDoctorView(APIView):
         if not diseases:
             return Response(
                 data={
-                    "data": "Sorry we couldn't find you a doctor. Please Sorry for inconvenience."
+                    "data": "Sorry we couldn't find you a doctor. Sorry for inconvenience."
                 },
                 status=status.HTTP_200_OK,
             )
