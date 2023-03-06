@@ -7,7 +7,7 @@ from utils.cosine_similarity import get_cosine_similarities
 
 from .stop_words import stop_words
 
-df = pd.read_csv("./datasets/Training.csv")
+df = pd.read_csv("/home/suman/Desktop/Doctor-recommendation-system/HospitalManagement/datasets/Training.csv")
 
 p = inflect.engine()
 spell = SpellChecker()
