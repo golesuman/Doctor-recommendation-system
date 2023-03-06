@@ -7,7 +7,7 @@ from utils.cosine_similarity import get_cosine_similarities
 
 from .stop_words import stop_words
 
-df = pd.read_csv("./datasets/Training.csv")
+df = pd.read_csv("./datasets/updated_randomized_dataset.csv")
 
 p = inflect.engine()
 spell = SpellChecker()
@@ -80,6 +80,7 @@ def give_disease(input_text):
     # print(vec2)
     similarities = get_cosine_similarities(vec2)
     results = sort_similarities(similarities)
+    print(results)
     for res in results:
         if res[1] > 0.2:
             disease_result.append(df.iloc[res[0]]["prognosis"])

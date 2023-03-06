@@ -18,7 +18,7 @@ def cosine_similarity(vector1, vector2):
 
 def get_cosine_similarities(vec2):
     similarities = []
-    with open("./datasets/updated_training_data.csv") as file_obj:
+    with open("./datasets/training_mat.csv") as file_obj:
         reader_obj = csv.reader(file_obj)
         next(reader_obj)
         for row in reader_obj:
