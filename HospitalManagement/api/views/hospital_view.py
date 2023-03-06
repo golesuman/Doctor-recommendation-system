@@ -41,6 +41,7 @@ class PredictDoctorView(APIView):
         for disease in diseases:
             for key, values in specialties.items():
                 if disease in values:
-                    result.append(key)
+                    if key not in result:
+                        result.append(key)
 
-        return Response(data={"data": set(result)}, status=status.HTTP_200_OK)
+        return Response(data={"data": result}, status=status.HTTP_200_OK)

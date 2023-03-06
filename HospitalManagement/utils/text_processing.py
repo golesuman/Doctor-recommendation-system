@@ -9,8 +9,6 @@ from .stop_words import stop_words
 
 df = pd.read_csv("./datasets/updated_randomized_dataset.csv")
 
-p = inflect.engine()
-spell = SpellChecker()
 
 columns = df.columns[:-2]
 
@@ -26,6 +24,7 @@ def remove_duplicate_words(sentence):
 
 def remove_stop_words(sentence):
     new_word_list = []
+    p = inflect.engine()
     unique_sentence = remove_duplicate_words(sentence)
     sentence = fix_wrong_words(unique_sentence)
     # split if the , or space is found in the sentence
@@ -87,7 +86,7 @@ def give_disease(input_text):
     for res in results:
         if res[1] > 0.1:
             disease_result.append(df.iloc[res[0]]["prognosis"])
-    return list(set(disease_result))
+    return list(disease_result)
 
 
 def is_input_valid(input_text):
@@ -98,12 +97,14 @@ def is_input_valid(input_text):
 
 
 def fix_wrong_words(text):
+    spell = SpellChecker()
     corrected_sentence = []
     for word in text.split():
+        word = spell.correction(word)
         if word:
-            corrected_sentence.append(spell.correction(word))
+            corrected_sentence.append(word)
+
     new_fixed_text = " ".join(corrected_sentence)
-    print(new_fixed_text)
     return new_fixed_text
 
 
