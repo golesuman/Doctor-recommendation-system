@@ -8,8 +8,15 @@ asgiref==3.6.0
     # via django
 backports-zoneinfo==0.2.1
     # via django
+blis==0.7.9
+    # via thinc
 build==0.10.0
     # via pip-tools
+catalogue==2.0.8
+    # via
+    #   spacy
+    #   srsly
+    #   thinc
 certifi==2022.12.7
     # via requests
 cffi==1.15.1
@@ -17,9 +24,18 @@ cffi==1.15.1
 charset-normalizer==3.0.1
     # via requests
 click==8.1.3
-    # via pip-tools
+    # via
+    #   pip-tools
+    #   typer
+confection==0.0.4
+    # via thinc
 cryptography==39.0.2
     # via pyjwt
+cymem==2.0.7
+    # via
+    #   preshed
+    #   spacy
+    #   thinc
 defusedxml==0.7.1
     # via python3-openid
 dj-rest-auth==2.2.3
@@ -58,6 +74,17 @@ idna==3.4
     # via requests
 inflect==6.0.2
     # via -r requirements.in
+jinja2==3.1.2
+    # via spacy
+langcodes==3.3.0
+    # via spacy
+markupsafe==2.1.2
+    # via jinja2
+murmurhash==1.0.9
+    # via
+    #   preshed
+    #   spacy
+    #   thinc
 mypy==1.0.1
     # via django-stubs
 mypy-extensions==1.0.0
@@ -65,19 +92,35 @@ mypy-extensions==1.0.0
 numpy==1.24.2
     # via
     #   -r requirements.in
+    #   blis
     #   pandas
+    #   spacy
+    #   thinc
 oauthlib==3.2.2
     # via requests-oauthlib
 packaging==23.0
-    # via build
+    # via
+    #   build
+    #   spacy
+    #   thinc
 pandas==1.5.3
     # via -r requirements.in
+pathy==0.10.1
+    # via spacy
 pip-tools==6.12.3
     # via -r requirements.in
+preshed==3.0.8
+    # via
+    #   spacy
+    #   thinc
 pycparser==2.21
     # via cffi
 pydantic==1.10.5
-    # via inflect
+    # via
+    #   confection
+    #   inflect
+    #   spacy
+    #   thinc
 pyjwt[crypto]==2.6.0
     # via django-allauth
 pyproject-hooks==1.0.0
@@ -94,12 +137,30 @@ requests==2.28.2
     # via
     #   django-allauth
     #   requests-oauthlib
+    #   spacy
 requests-oauthlib==1.3.1
     # via django-allauth
 six==1.16.0
     # via python-dateutil
+smart-open==6.3.0
+    # via
+    #   pathy
+    #   spacy
+spacy==3.5.0
+    # via -r requirements.in
+spacy-legacy==3.0.12
+    # via spacy
+spacy-loggers==1.0.4
+    # via spacy
 sqlparse==0.4.3
     # via django
+srsly==2.4.6
+    # via
+    #   confection
+    #   spacy
+    #   thinc
+thinc==8.1.9
+    # via spacy
 toml==0.10.2
     # via django-stubs
 tomli==2.0.1
@@ -107,6 +168,12 @@ tomli==2.0.1
     #   build
     #   mypy
     #   pyproject-hooks
+tqdm==4.65.0
+    # via spacy
+typer==0.7.0
+    # via
+    #   pathy
+    #   spacy
 types-pytz==2022.7.1.2
     # via django-stubs
 types-pyyaml==6.0.12.8
@@ -119,6 +186,10 @@ typing-extensions==4.5.0
     #   pydantic
 urllib3==1.26.14
     # via requests
+wasabi==1.1.1
+    # via
+    #   spacy
+    #   thinc
 wheel==0.38.4
     # via pip-tools
 

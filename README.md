@@ -15,7 +15,7 @@
 
 - Send POST Request to this endpoint
     ```
-    http://0.0.0.0:8000/api/recommend-doctor
+    http://0.0.0.0:8000/api/recommend-doc
     ```
 - Sample Input
     ```
@@ -27,9 +27,21 @@
     ```
    {
     "data": [
-        "Dermatologist",
-        "Neurologist",
-        "Allergist_Immunologist"
-        ]
-    }
+        {
+        "Dengue": "Allergist_Immunologist"
+        },
+        {
+        "Common Cold": "Allergist_Immunologist"
+        },
+        {
+        "Hypothyroidism": "ENT_specialist"
+        },
+        {
+        "Hypoglycemia": "Gastroenterologist"
+        },
+        {
+        "Chicken pox": "Dermatologist"
+        }
+    ]
+}
     ```

@@ -15,5 +15,6 @@ COPY ./requirements.txt /backend-api/requirements.txt
 
 RUN ls -a
 RUN python -m pip install -r requirements.txt
+RUN python3 -m spacy download en_core_web_md
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

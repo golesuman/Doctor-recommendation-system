@@ -6,7 +6,7 @@ nlp = spacy.load("en_core_web_md")  # Load the medium-sized English language mod
 
 import pandas as pd
 
-columns = pd.read_csv("/home/suman/Desktop/Doctor-recommendation-system/HospitalManagement/datasets/updated_training_data.csv").columns[1:]
+columns = pd.read_csv("./datasets/updated_training_data.csv").columns[1:]
 
 new_columns = [" ".join(re.split("_", column)) for column in columns]
 # Create a dictionary to store the similarity scores between the input text and each column
