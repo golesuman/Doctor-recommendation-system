@@ -44,4 +44,4 @@ class PredictDoctorAPI(APIView):
                     res = {disease : key}
                     if res not in result:
                         result.append(res)
-        return Response(data={"data": result[:5]}, status=status.HTTP_200_OK)
+        return Response(data={"data": result[:2]}, status=status.HTTP_200_OK)

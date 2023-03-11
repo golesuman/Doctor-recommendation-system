@@ -1,8 +1,8 @@
 import re
-
+import scispacy
 import spacy
 
-nlp = spacy.load("en_core_web_md")  # Load the medium-sized English language model
+nlp = spacy.load("en_core_sci_md")  # Load the medium-sized English language model
 
 import pandas as pd
 
