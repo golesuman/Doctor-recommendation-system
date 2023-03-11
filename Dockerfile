@@ -15,6 +15,6 @@ COPY ./requirements.txt /backend-api/requirements.txt
 
 RUN ls -a
 RUN python -m pip install -r requirements.txt
-RUN python3 -m spacy download en_core_web_md
-
+RUN python -m spacy download en_core_web_md
+RUN python -m pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.1/en_core_sci_md-0.5.1.tar.gz
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

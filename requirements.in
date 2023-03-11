@@ -13,3 +13,4 @@ inflect
 pip-tools
 pyspellchecker
 spacy
+scispacy

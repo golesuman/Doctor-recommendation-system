@@ -1,5 +1,5 @@
 import re
-import scispacy
+# import sci
 import spacy
 
 nlp = spacy.load("en_core_sci_md")  # Load the medium-sized English language model
