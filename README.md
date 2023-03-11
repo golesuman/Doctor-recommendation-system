@@ -26,22 +26,23 @@
 - Sample Output
     ```
    {
-    "data": [
-        {
-        "Dengue": "Allergist_Immunologist"
-        },
-        {
-        "Common Cold": "Allergist_Immunologist"
-        },
-        {
-        "Hypothyroidism": "ENT_specialist"
-        },
-        {
-        "Hypoglycemia": "Gastroenterologist"
-        },
-        {
-        "Chicken pox": "Dermatologist"
-        }
-    ]
-}
+    "data": 
+        [
+            {
+            "Dengue": "Allergist_Immunologist"
+            },
+            {
+            "Common Cold": "Allergist_Immunologist"
+            },
+            {
+            "Hypothyroidism": "ENT_specialist"
+            },
+            {
+            "Hypoglycemia": "Gastroenterologist"
+            },
+            {
+            "Chicken pox": "Dermatologist"
+            }
+        ]
+    }
     ```
