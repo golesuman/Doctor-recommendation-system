@@ -20,7 +20,7 @@
 - Sample Input
     ```
     {
-        "symptoms" : "common cold and fever with red spots all over the body" 
+        "symptoms" : "leg pain with difficulty to walk"
     }
     ```
 - Sample Output
@@ -29,19 +29,10 @@
     "data": 
         [
             {
-            "Dengue": "Allergist_Immunologist"
+            "Osteoarthristis": "Rheumatologist"
             },
             {
-            "Common Cold": "Allergist_Immunologist"
-            },
-            {
-            "Hypothyroidism": "ENT_specialist"
-            },
-            {
-            "Hypoglycemia": "Gastroenterologist"
-            },
-            {
-            "Chicken pox": "Dermatologist"
+            "Arthritis": "Rheumatologist"
             }
         ]
     }
