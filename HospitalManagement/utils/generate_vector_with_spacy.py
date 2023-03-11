@@ -27,6 +27,6 @@ def create_vector_based_on_similar_word(input_text):
         similarity_scores[column] = similarity_score
 
     # Create the vector by mapping the similarity scores to 1 or 0 based on a threshold value
-    threshold = 0.8 # Adjust this value based on your needs
+    threshold = 0.65 # Adjust this value based on your needs
     vector = [1 if similarity_scores[column] >= threshold else 0 for column in new_columns]
     return vector

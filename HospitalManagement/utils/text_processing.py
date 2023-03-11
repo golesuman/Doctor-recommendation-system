@@ -117,24 +117,26 @@ def remove_special_characters_from_word(word):
 
 
 
-def give_disease_spacy(input_text):
-    clean_sentence = []
-    disease_result = []
-
-    for word in input_text.split():
+def remove_stop_words_from_sentence(sentence):
+    result = []
+    splitted_words = re.split(r"[,\s]+", sentence.lower())
+    for word in splitted_words:
         if word not in stop_words:
-            clean_sentence.append(clean_numbers_and_special_characters(word))
-    
-    resultant  = " ".join(clean_sentence)
-    vec2 = create_vector_based_on_similar_word(resultant)
-    # print(vec2)
-    # vec2 = create_vector_from_input(formatted_list)
+            result.append(clean_numbers_and_special_characters(word))
+    final_result = " ".join(result)
+    return final_result
+        
+
+def give_disease_spacy(input_text):
+    disease_result = []
+    clean_sentence = remove_stop_words_from_sentence(input_text)
+    vec2 = create_vector_based_on_similar_word(clean_sentence)
     if all(val == 0 for val in vec2):
         return None
     similarities = get_cosine_similarities(vec2)
     results = sort_similarities(similarities)
     for res in results:
-        if res[1] > 0.1:
+        if res[1] > 0.05:
             disease_result.append(df.iloc[res[0]]["prognosis"])
     return disease_result
 

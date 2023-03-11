@@ -1,5 +1,6 @@
 stop_words = [
     "i",
+    "I",
     "me",
     "my",
     "myself",
