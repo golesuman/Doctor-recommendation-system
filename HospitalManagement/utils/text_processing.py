@@ -134,7 +134,7 @@ def give_disease_spacy(input_text):
     similarities = get_cosine_similarities(vec2)
     results = sort_similarities(similarities)
     for res in results:
-        if res[1] > 0.2:
+        if res[1] > 0.1:
             disease_result.append(df.iloc[res[0]]["prognosis"])
     return disease_result
 
